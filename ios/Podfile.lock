@@ -1,0 +1,29 @@
+PODS:
+  - Flutter (1.0.0)
+  - ViafouraCore (0.0.38)
+  - webview_flutter_wkwebview (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - ViafouraCore
+  - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
+
+SPEC REPOS:
+  trunk:
+    - ViafouraCore
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  webview_flutter_wkwebview:
+    :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
+
+SPEC CHECKSUMS:
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  ViafouraCore: c4b11fc36a49d098b96049a920423dd8e8c64dbd
+  webview_flutter_wkwebview: 2e2d318f21a5e036e2c3f26171342e95908bd60a
+
+PODFILE CHECKSUM: 345e3f8943c3bad79a958417039bf694cd326343
+
+COCOAPODS: 1.14.2
