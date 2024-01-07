@@ -35,13 +35,14 @@ class FLNativeViewFactory: NSObject, FlutterPlatformViewFactory {
     }
 }
 
-class FLNativeView: NSObject, FlutterPlatformView, VFLoginDelegate {
+class FLNativeView: NSObject, FlutterPlatformView, VFLoginDelegate, VFLayoutDelegate {
     private var _view: UIView
 
     var settings: VFSettings?
     var articleMetadata: VFArticleMetadata?
     
     let containerId = "91992921"
+    
     init(
         frame: CGRect,
         viewIdentifier viewId: Int64,
@@ -86,6 +87,7 @@ class FLNativeView: NSObject, FlutterPlatformView, VFLoginDelegate {
         }
         
         commentsFragment.setActionCallbacks(callbacks: callbacks)
+        commentsFragment.setLayoutDelegate(layoutDelegate: self)
         
         parentViewController.addChild(commentsFragment)
         _view.addSubview(commentsFragment.view)
@@ -143,6 +145,10 @@ class FLNativeView: NSObject, FlutterPlatformView, VFLoginDelegate {
         }
         newCommentViewController.setActionCallbacks(callbacks: callbacks)
         parentViewController.present(newCommentViewController, animated: true)
+    }
+    
+    func containerHeightUpdated(viewController: VFUIViewController, height: CGFloat) {
+        
     }
     
     func startLogin() {

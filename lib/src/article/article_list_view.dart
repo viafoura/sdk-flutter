@@ -7,7 +7,7 @@ import 'article.dart';
 class ArticleListView extends StatelessWidget {
   const ArticleListView({
     super.key,
-    this.items = const [Article("1"), Article("2"), Article("3")],
+    this.items = const [Article("News", "0100010", "", "")],
   });
 
   static const routeName = '/';

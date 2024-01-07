@@ -20,7 +20,7 @@ import ViafouraSDK
         let factory = FLNativeViewFactory(messenger: registrar!.messenger())
         self.registrar(forPlugin: "<plugin-name>")!.register(
             factory,
-            withId: "<platform-view-type>")
+            withId: "vfCommentsFragment")
         
         ViafouraSDK.initialize(siteUUID: "00000000-0000-4000-8000-c8cddfd7b365", siteDomain: "viafoura-mobile-demo.vercel.app")
     }

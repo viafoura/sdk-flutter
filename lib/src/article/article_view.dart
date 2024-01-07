@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sdk_flutter/src/article/article.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -8,7 +9,7 @@ import 'package:flutter/rendering.dart';
 /// Displays detailed information about a SampleItem.
 class ArticleView extends StatelessWidget {
   const ArticleView({super.key});
-  static const routeName = '/sample_item';
+  static const routeName = '/article';
 
 static var controller = WebViewController()
   ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -18,7 +19,7 @@ static var controller = WebViewController()
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Article'),
+        title: const Text("Article"),
       ),
       body: Expanded(
         child: SingleChildScrollView(
@@ -38,7 +39,7 @@ static var controller = WebViewController()
 class CommentsFragment extends StatelessWidget {
   Widget build(BuildContext context) {
   // This is used in the platform side to register the view.
-  const String viewType = '<platform-view-type>';
+  const String viewType = 'vfCommentsFragment';
   // Pass parameters to the platform side.
   final Map<String, dynamic> creationParams = <String, dynamic>{};
 
