@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'sample_item.dart';
-import 'sample_item_details_view.dart';
+import 'article_view.dart';
+import 'article.dart';
 
 /// Displays a list of SampleItems.
-class SampleItemListView extends StatelessWidget {
-  const SampleItemListView({
+class ArticleListView extends StatelessWidget {
+  const ArticleListView({
     super.key,
     this.items = const [Article("1"), Article("2"), Article("3")],
   });
@@ -36,7 +36,7 @@ class SampleItemListView extends StatelessWidget {
             onTap: () {
               Navigator.restorablePushNamed(
                 context,
-                SampleItemDetailsView.routeName,
+                ArticleView.routeName,
               );
             }
           );
