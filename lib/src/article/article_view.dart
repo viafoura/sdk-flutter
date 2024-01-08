@@ -8,9 +8,13 @@ import 'package:flutter/rendering.dart';
 
 /// Displays detailed information about a SampleItem.
 class ArticleView extends StatelessWidget {
-  const ArticleView({super.key});
+  const ArticleView({
+    super.key,
+    this.channel = const MethodChannel('HEIGHT_UPDATED_CHANNEL')
+  });
   static const routeName = '/article';
   
+    final MethodChannel channel;
 
 static var controller = WebViewController()
   ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -18,6 +22,14 @@ static var controller = WebViewController()
 
   @override
   Widget build(BuildContext context) {
+         Future<dynamic> invokedMethods(MethodCall methodCall) async {
+    switch (methodCall.method) {
+        case "heightUpdated":
+        //commentsContainerHeight = methodCall.arguments;
+      }
+  }
+
+    channel.setMethodCallHandler(invokedMethods);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Article"),
@@ -29,7 +41,7 @@ static var controller = WebViewController()
           Container(
             height: 200,
             child: WebViewWidget(controller: controller)),
-          Container(height: 500, child: CommentsFragment()),
+          Container(height: 1000, child: CommentsFragment()),
 
         ])
       ),

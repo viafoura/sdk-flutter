@@ -4,11 +4,19 @@ import ViafouraSDK
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
+    
+    var authChannel, heightChannel: FlutterMethodChannel?
+    
   override func application(
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
       GeneratedPluginRegistrant.register(with: self)
+      
+      let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
+      
+      authChannel = FlutterMethodChannel(name: AUTH_CHANNEL, binaryMessenger: controller.binaryMessenger)
+      heightChannel = FlutterMethodChannel(name: HEIGHT_CHANNEL, binaryMessenger: controller.binaryMessenger)
       
       registerViafouraSDK()
       return super.application(application, didFinishLaunchingWithOptions: launchOptions)

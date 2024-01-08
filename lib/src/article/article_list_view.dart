@@ -12,7 +12,7 @@ class ArticleListView extends StatelessWidget {
   const ArticleListView({
     super.key,
     this.items = const [Article("News", "0100010", "", "")],
-    this.channel = const MethodChannel('INTERFACE_CHANNEL')
+    this.channel = const MethodChannel('AUTH_CHANNEL')
   });
 
   static const routeName = '/';

@@ -43,6 +43,8 @@ class FLNativeView: NSObject, FlutterPlatformView, VFLoginDelegate, VFLayoutDele
     
     let containerId = "91992921"
     
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     init(
         frame: CGRect,
         viewIdentifier viewId: Int64,
@@ -148,10 +150,10 @@ class FLNativeView: NSObject, FlutterPlatformView, VFLoginDelegate, VFLayoutDele
     }
     
     func containerHeightUpdated(viewController: VFUIViewController, height: CGFloat) {
-        
+        appDelegate.heightChannel?.invokeMethod("heightUpdated", arguments: height)
     }
     
     func startLogin() {
-        
+        appDelegate.authChannel?.invokeMethod("startLogin", arguments: nil)
     }
 }

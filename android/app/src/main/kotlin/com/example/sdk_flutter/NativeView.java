@@ -40,8 +40,8 @@ class NativeView implements PlatformView {
     private View fragmentContainerView;
 
     public NativeView(@NonNull Context context, int id, @Nullable Map<String, Object> creationParams, FlutterEngine flutterEngine) {
-        MethodChannel channel = new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), Constants.CHANNEL);
-
+        MethodChannel heightChannel = new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), Constants.HEIGHT_UPDATED);
+        MethodChannel authChannel = new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), Constants.AUTH_CHANNEL);
 
         VFArticleMetadata articleMetadata = null;
         try {
@@ -54,13 +54,13 @@ class NativeView implements PlatformView {
         VFPreviewCommentsFragment previewCommentsFragment = VFPreviewCommentsFragment.newInstance((Application) context.getApplicationContext(), "12939123", articleMetadata, new VFLoginInterface() {
             @Override
             public void startLogin() {
-                channel.invokeMethod("startLogin", null);
+                authChannel.invokeMethod("startLogin", null);
             }
         }, vfSettings, 10, VFSortType.mostLiked);
         previewCommentsFragment.setLayoutCallback(new VFLayoutInterface() {
             @Override
             public void containerHeightUpdated(VFFragment fragment, String containerId, int height) {
-
+                heightChannel.invokeMethod("heightUpdated", height);
             }
         });
 
