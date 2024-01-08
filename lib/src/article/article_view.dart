@@ -10,6 +10,7 @@ import 'package:flutter/rendering.dart';
 class ArticleView extends StatelessWidget {
   const ArticleView({super.key});
   static const routeName = '/article';
+  
 
 static var controller = WebViewController()
   ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -28,7 +29,7 @@ static var controller = WebViewController()
           Container(
             height: 200,
             child: WebViewWidget(controller: controller)),
-          Container(height: 100, child: CommentsFragment()),
+          Container(height: 500, child: CommentsFragment()),
 
         ])
       ),

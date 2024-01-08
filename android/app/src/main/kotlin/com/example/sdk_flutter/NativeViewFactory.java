@@ -1,6 +1,7 @@
 package com.example.sdk_flutter;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
@@ -11,20 +12,27 @@ import androidx.annotation.Nullable;
 
 import java.util.Map;
 
+import io.flutter.embedding.android.FlutterActivity;
+import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.plugin.common.StandardMessageCodec;
 import io.flutter.plugin.platform.PlatformView;
 import io.flutter.plugin.platform.PlatformViewFactory;
 
 class NativeViewFactory extends PlatformViewFactory {
 
-    NativeViewFactory() {
+
+    private FlutterEngine flutterEngine;
+
+    NativeViewFactory(FlutterEngine flutterEngine) {
         super(StandardMessageCodec.INSTANCE);
+
+        this.flutterEngine = flutterEngine;
     }
 
     @NonNull
     @Override
     public PlatformView create(@NonNull Context context, int id, @Nullable Object args) {
         final Map<String, Object> creationParams = (Map<String, Object>) args;
-        return new NativeView(context, id, creationParams);
+        return new NativeView(context, id, creationParams, flutterEngine);
     }
 }

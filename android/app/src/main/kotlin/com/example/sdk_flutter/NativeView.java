@@ -1,13 +1,21 @@
 package com.example.sdk_flutter;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentContainerView;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.viafourasdk.src.fragments.base.VFFragment;
 import com.viafourasdk.src.fragments.previewcomments.VFPreviewCommentsFragment;
@@ -22,13 +30,19 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
+import io.flutter.embedding.android.FlutterActivity;
+import io.flutter.embedding.engine.FlutterEngine;
+import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.platform.PlatformView;
 
 class NativeView implements PlatformView {
-    @NonNull
-    private final VFPreviewCommentsFragment previewCommentsFragment;
 
-    NativeView(@NonNull Context context, int id, @Nullable Map<String, Object> creationParams) {
+    private View fragmentContainerView;
+
+    public NativeView(@NonNull Context context, int id, @Nullable Map<String, Object> creationParams, FlutterEngine flutterEngine) {
+        MethodChannel channel = new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), Constants.CHANNEL);
+
+
         VFArticleMetadata articleMetadata = null;
         try {
             articleMetadata = new VFArticleMetadata(new URL("https://test.com"), "", "", new URL("https://test.com"));
@@ -37,10 +51,10 @@ class NativeView implements PlatformView {
         }
         VFColors vfColors = new VFColors(Color.RED, Color.RED);
         VFSettings vfSettings = new VFSettings(vfColors);
-        previewCommentsFragment = VFPreviewCommentsFragment.newInstance((Application) context.getApplicationContext(), "", articleMetadata, new VFLoginInterface() {
+        VFPreviewCommentsFragment previewCommentsFragment = VFPreviewCommentsFragment.newInstance((Application) context.getApplicationContext(), "12939123", articleMetadata, new VFLoginInterface() {
             @Override
             public void startLogin() {
-
+                channel.invokeMethod("startLogin", null);
             }
         }, vfSettings, 10, VFSortType.mostLiked);
         previewCommentsFragment.setLayoutCallback(new VFLayoutInterface() {
@@ -49,12 +63,55 @@ class NativeView implements PlatformView {
 
             }
         });
+
+        int viewId = 010031013;
+        View view = new FragmentContainerView(context);
+        view.setId(viewId);
+
+        view.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+            @Override
+            public void onViewAttachedToWindow(@NonNull View view) {
+                FragmentActivity activity = getFragmentActivityOrThrow(view.getContext());
+
+                if(activity != null){
+                    Fragment existingFragment = activity.getSupportFragmentManager().findFragmentByTag("flutter_fragment");
+                    if(existingFragment != null){
+                        FragmentTransaction fragmentTransaction = existingFragment.getChildFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(viewId, previewCommentsFragment);
+                        fragmentTransaction.commit();
+                    }
+                }
+            }
+
+            @Override
+            public void onViewDetachedFromWindow(@NonNull View view) {
+
+            }
+        });
+
+        this.fragmentContainerView = view;
+    }
+
+    private FragmentActivity getFragmentActivityOrThrow(Context context) throws IllegalStateException{
+        if (context instanceof FragmentActivity) {
+            return (FragmentActivity) context;
+        }
+
+        Context currentContext = context;
+        while (currentContext instanceof ContextWrapper) {
+            if (currentContext instanceof FragmentActivity) {
+                return (FragmentActivity) currentContext;
+            }
+            currentContext = ((ContextWrapper) currentContext).getBaseContext();
+        }
+
+        throw new IllegalStateException("Unable to find activity");
     }
 
     @NonNull
     @Override
     public View getView() {
-        return previewCommentsFragment.getView();
+        return fragmentContainerView;
     }
 
     @Override
