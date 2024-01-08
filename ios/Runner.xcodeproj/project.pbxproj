@@ -56,7 +56,7 @@
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
 		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
-		97C146EE1CF9000F007C117D /* Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Runner.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		97C146EE1CF9000F007C117D /* Viafoura.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Viafoura.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97C146FB1CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				9740EEB11CF90186004384FC /* Flutter */,
-				97C146F01CF9000F007C117D /* Runner */,
+				97C146F01CF9000F007C117D /* Viafoura */,
 				97C146EF1CF9000F007C117D /* Products */,
 				73182E60333CB3F820590AF7 /* Pods */,
 				C7B1512D5EA0632F3C4D76D3 /* Frameworks */,
@@ -127,13 +127,13 @@
 		97C146EF1CF9000F007C117D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				97C146EE1CF9000F007C117D /* Runner.app */,
+				97C146EE1CF9000F007C117D /* Viafoura.app */,
 				331C8081294A63A400263BE5 /* RunnerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		97C146F01CF9000F007C117D /* Runner */ = {
+		97C146F01CF9000F007C117D /* Viafoura */ = {
 			isa = PBXGroup;
 			children = (
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
@@ -147,7 +147,7 @@
 				4783A1DD2B45C809002F18E8 /* FLNativeViewFactory.swift */,
 				4783A1DF2B45C85C002F18E8 /* FLPlugin.swift */,
 			);
-			path = Runner;
+			path = Viafoura;
 			sourceTree = "<group>";
 		};
 		C7B1512D5EA0632F3C4D76D3 /* Frameworks */ = {
@@ -181,9 +181,9 @@
 			productReference = 331C8081294A63A400263BE5 /* RunnerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		97C146ED1CF9000F007C117D /* Runner */ = {
+		97C146ED1CF9000F007C117D /* Viafoura */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 97C147051CF9000F007C117D /* Build configuration list for PBXNativeTarget "Runner" */;
+			buildConfigurationList = 97C147051CF9000F007C117D /* Build configuration list for PBXNativeTarget "Viafoura" */;
 			buildPhases = (
 				2D9376299FFF746D065AC6DA /* [CP] Check Pods Manifest.lock */,
 				9740EEB61CF901F6004384FC /* Run Script */,
@@ -198,9 +198,9 @@
 			);
 			dependencies = (
 			);
-			name = Runner;
+			name = Viafoura;
 			productName = Runner;
-			productReference = 97C146EE1CF9000F007C117D /* Runner.app */;
+			productReference = 97C146EE1CF9000F007C117D /* Viafoura.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -236,7 +236,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				97C146ED1CF9000F007C117D /* Runner */,
+				97C146ED1CF9000F007C117D /* Viafoura */,
 				331C8080294A63A400263BE5 /* RunnerTests */,
 			);
 		};
@@ -382,7 +382,7 @@
 /* Begin PBXTargetDependency section */
 		331C8086294A63A400263BE5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 97C146ED1CF9000F007C117D /* Runner */;
+			target = 97C146ED1CF9000F007C117D /* Viafoura */;
 			targetProxy = 331C8085294A63A400263BE5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -466,14 +466,14 @@
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = 7P62U78JWB;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_FILE = Viafoura/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.viafoura.sdkFlutter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Viafoura/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -645,14 +645,14 @@
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = 7P62U78JWB;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_FILE = Viafoura/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.viafoura.sdkFlutter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Viafoura/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -668,14 +668,14 @@
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = 7P62U78JWB;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_FILE = Viafoura/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.viafoura.sdkFlutter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Viafoura/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -704,7 +704,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		97C147051CF9000F007C117D /* Build configuration list for PBXNativeTarget "Runner" */ = {
+		97C147051CF9000F007C117D /* Build configuration list for PBXNativeTarget "Viafoura" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				97C147061CF9000F007C117D /* Debug */,
