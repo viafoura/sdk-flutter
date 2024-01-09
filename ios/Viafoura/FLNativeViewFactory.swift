@@ -41,8 +41,7 @@ class FLNativeView: NSObject, FlutterPlatformView, VFLoginDelegate, VFLayoutDele
     var settings: VFSettings?
     var articleMetadata: VFArticleMetadata?
     
-    let containerId = "91992921"
-    
+    var arguments: [String: String]!
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     init(
@@ -53,7 +52,8 @@ class FLNativeView: NSObject, FlutterPlatformView, VFLoginDelegate, VFLayoutDele
     ) {
         _view = UIView()
         super.init()
-        // iOS views can be created here
+        
+        self.arguments = args as? [String: String]
         createNativeView(view: _view)
     }
 
@@ -79,12 +79,12 @@ class FLNativeView: NSObject, FlutterPlatformView, VFLoginDelegate, VFLayoutDele
 
         let colors = VFColors(colorPrimary: .red, colorPrimaryLight: .blue)
         settings = VFSettings(colors: colors)
-        articleMetadata = VFArticleMetadata(url: URL(string: "https://test.com")!, title: "Title", subtitle: "Subtitle", thumbnailUrl: URL(string: "https://test.com")!)
+        articleMetadata = VFArticleMetadata(url: URL(string: arguments["containerId"]!)!, title: arguments["title"]!, subtitle: arguments["description"]!, thumbnailUrl: URL(string: arguments["thubmnailUrl"]!)!)
         guard let settings, let articleMetadata else {
             return
         }
 
-        guard let commentsFragment = VFPreviewCommentsViewController.new(containerId: containerId, articleMetadata: articleMetadata, loginDelegate: self, settings: settings) else {
+        guard let commentsFragment = VFPreviewCommentsViewController.new(containerId: arguments["containerId"]!, articleMetadata: articleMetadata, loginDelegate: self, settings: settings) else {
             return
         }
         
@@ -142,7 +142,7 @@ class FLNativeView: NSObject, FlutterPlatformView, VFLoginDelegate, VFLayoutDele
             }
         }
 
-        guard let newCommentViewController = VFNewCommentViewController.new(newCommentActionType: actionType, containerId: containerId, articleMetadata: articleMetadata, loginDelegate: self, settings: settings) else{
+        guard let newCommentViewController = VFNewCommentViewController.new(newCommentActionType: actionType, containerId: arguments["containerId"]!, articleMetadata: articleMetadata, loginDelegate: self, settings: settings) else{
             return
         }
         newCommentViewController.setActionCallbacks(callbacks: callbacks)

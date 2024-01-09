@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:sdk_flutter/src/article/article.dart';
 import 'package:sdk_flutter/src/auth/login/forgot_password_view.dart';
 import 'package:sdk_flutter/src/auth/login/login_view.dart';
 import 'package:sdk_flutter/src/auth/login/signup_view.dart';
@@ -38,7 +39,8 @@ class MyApp extends StatelessWidget {
               builder: (BuildContext context) {
                 switch (routeSettings.name) {
                   case ArticleView.routeName:
-                    return const ArticleView();
+                    final article = routeSettings.arguments as Article;
+                    return ArticleView(article: article);
                   case LoginView.routeName:
                     return const LoginView();
                   case SignupView.routeName:
