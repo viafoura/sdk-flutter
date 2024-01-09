@@ -33,6 +33,7 @@ class CommentsFragment extends StatelessWidget {
     creationParams["description"] = description;
     creationParams["url"] = url;
     creationParams["thubmnailUrl"] = thubmnailUrl;
+    print(creationParams);
 
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:

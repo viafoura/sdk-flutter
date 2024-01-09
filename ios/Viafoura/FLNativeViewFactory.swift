@@ -29,7 +29,6 @@ class FLNativeViewFactory: NSObject, FlutterPlatformViewFactory {
             binaryMessenger: messenger)
     }
 
-    /// Implementing this method is only necessary when the `arguments` in `createWithFrame` is not `nil`.
     public func createArgsCodec() -> FlutterMessageCodec & NSObjectProtocol {
           return FlutterStandardMessageCodec.sharedInstance()
     }
@@ -79,14 +78,17 @@ class FLNativeView: NSObject, FlutterPlatformView, VFLoginDelegate, VFLayoutDele
 
         let colors = VFColors(colorPrimary: .red, colorPrimaryLight: .blue)
         settings = VFSettings(colors: colors)
-        articleMetadata = VFArticleMetadata(url: URL(string: arguments["containerId"]!)!, title: arguments["title"]!, subtitle: arguments["description"]!, thumbnailUrl: URL(string: arguments["thubmnailUrl"]!)!)
+        articleMetadata = VFArticleMetadata(url: URL(string: arguments["url"]!)!, title: arguments["title"]!, subtitle: arguments["description"]!, thumbnailUrl: URL(string: arguments["thubmnailUrl"]!)!)
         guard let settings, let articleMetadata else {
             return
         }
 
-        guard let commentsFragment = VFPreviewCommentsViewController.new(containerId: arguments["containerId"]!, articleMetadata: articleMetadata, loginDelegate: self, settings: settings) else {
-            return
-        }
+        let commentsFragment = VFPreviewCommentsViewController.new(
+            containerId: arguments["containerId"]!,
+            articleMetadata: articleMetadata,
+            loginDelegate: self,
+            settings: settings
+        )
         
         commentsFragment.setActionCallbacks(callbacks: callbacks)
         commentsFragment.setLayoutDelegate(layoutDelegate: self)
@@ -117,9 +119,12 @@ class FLNativeView: NSObject, FlutterPlatformView, VFLoginDelegate, VFLayoutDele
             }
         }
         
-        guard let profileViewController = VFProfileViewController.new(userUUID: userUUID, presentationType: presentationType, loginDelegate: self, settings: settings) else{
-            return
-        }
+        let profileViewController = VFProfileViewController.new(
+            userUUID: userUUID,
+            presentationType: presentationType,
+            loginDelegate: self,
+            settings: settings
+        )
 
         profileViewController.setActionCallbacks(callbacks: callbacks)
         parentViewController.present(profileViewController, animated: true)
@@ -142,9 +147,13 @@ class FLNativeView: NSObject, FlutterPlatformView, VFLoginDelegate, VFLayoutDele
             }
         }
 
-        guard let newCommentViewController = VFNewCommentViewController.new(newCommentActionType: actionType, containerId: arguments["containerId"]!, articleMetadata: articleMetadata, loginDelegate: self, settings: settings) else{
-            return
-        }
+        let newCommentViewController = VFNewCommentViewController.new(
+            newCommentActionType: actionType,
+            containerId: arguments["containerId"]!,
+            articleMetadata: articleMetadata,
+            loginDelegate: self,
+            settings: settings
+        )
         newCommentViewController.setActionCallbacks(callbacks: callbacks)
         parentViewController.present(newCommentViewController, animated: true)
     }
