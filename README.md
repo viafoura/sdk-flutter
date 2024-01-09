@@ -11,3 +11,7 @@ This project shows you how to integrate Viafoura tools into a flutter app.
 
 #### How to run?
 1. Clone project
+2. ```cd ios/```
+3. ```pod install```
+4. ```cd ../```
+5. ```flutter run```
