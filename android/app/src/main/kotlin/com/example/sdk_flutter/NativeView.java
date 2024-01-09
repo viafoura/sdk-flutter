@@ -19,8 +19,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.viafourasdk.src.fragments.base.VFFragment;
 import com.viafourasdk.src.fragments.previewcomments.VFPreviewCommentsFragment;
+import com.viafourasdk.src.interfaces.VFActionsInterface;
 import com.viafourasdk.src.interfaces.VFLayoutInterface;
 import com.viafourasdk.src.interfaces.VFLoginInterface;
+import com.viafourasdk.src.model.local.VFActionData;
+import com.viafourasdk.src.model.local.VFActionType;
 import com.viafourasdk.src.model.local.VFArticleMetadata;
 import com.viafourasdk.src.model.local.VFColors;
 import com.viafourasdk.src.model.local.VFSettings;
@@ -32,6 +35,7 @@ import java.util.Map;
 
 import io.flutter.embedding.android.FlutterActivity;
 import io.flutter.embedding.engine.FlutterEngine;
+import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.platform.PlatformView;
 
@@ -42,13 +46,7 @@ class NativeView implements PlatformView {
     public NativeView(@NonNull Context context, int id, @Nullable Map<String, Object> creationParams, FlutterEngine flutterEngine) {
         MethodChannel heightChannel = new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), Constants.HEIGHT_UPDATED);
         MethodChannel authChannel = new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), Constants.AUTH_CHANNEL);
-
-        VFArticleMetadata articleMetadata = null;
-        try {
-            articleMetadata = new VFArticleMetadata(new URL("https://test.com"), "", "", new URL("https://test.com"));
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
+        VFArticleMetadata articleMetadata = new VFArticleMetadata((String) creationParams.get("url"), (String) creationParams.get("title"), (String) creationParams.get("description"), (String) creationParams.get("thubmnailUrl"));
         VFColors vfColors = new VFColors(Color.RED, Color.RED);
         VFSettings vfSettings = new VFSettings(vfColors);
         VFPreviewCommentsFragment previewCommentsFragment = VFPreviewCommentsFragment.newInstance((Application) context.getApplicationContext(), "12939123", articleMetadata, new VFLoginInterface() {
@@ -63,8 +61,16 @@ class NativeView implements PlatformView {
                 heightChannel.invokeMethod("heightUpdated", height);
             }
         });
+        previewCommentsFragment.setActionCallback(new VFActionsInterface() {
+            @Override
+            public void onNewAction(VFActionType actionType, VFActionData action) {
+                if(actionType == VFActionType.trendingArticlePressed){
+                    authChannel.invokeMethod("articlePressed", action.getTrendingPressedAction().containerId);
+                }
+            }
+        });
 
-        int viewId = 010031013;
+        int viewId = View.generateViewId();
         View view = new FragmentContainerView(context);
         view.setId(viewId);
 

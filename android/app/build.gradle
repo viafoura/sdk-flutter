@@ -62,7 +62,7 @@ android {
 
 dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
-    implementation 'com.viafoura:android:0.0.40'
+    implementation 'com.viafoura:android:0.0.41'
 }
 
 flutter {

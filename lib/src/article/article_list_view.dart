@@ -28,6 +28,12 @@ class ArticleListView extends StatelessWidget {
             context,
             LoginView.routeName,
           );
+          case "articlePressed":
+          Navigator.pushNamed(
+            context,
+            ArticleView.routeName,
+            arguments: items[0]
+          );
       }
     }
 

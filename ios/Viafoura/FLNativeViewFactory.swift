@@ -71,6 +71,9 @@ class FLNativeView: NSObject, FlutterPlatformView, VFLoginDelegate, VFLayoutDele
                 self?.presentNewCommentViewController(actionType: actionType)
             case .openProfilePressed(let userUUID, let presentationType):
                 self?.presentProfileViewController(userUUID: userUUID, presentationType: presentationType)
+            case .trendingArticlePressed(let metadata, let containerId):
+                self?.appDelegate.authChannel?.invokeMethod("articlePressed", arguments: containerId)
+                break
             default:
                 break
             }

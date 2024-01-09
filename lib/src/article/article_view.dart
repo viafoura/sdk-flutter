@@ -16,7 +16,7 @@ class ArticleView extends StatefulWidget {
 }
 
 class _MyArticleView extends State<ArticleView> {
-  double commentsContainerHeight = 200;
+  double commentsContainerHeight = 3000;
   double webviewHeight = 200;
   late WebViewController controller;
 
